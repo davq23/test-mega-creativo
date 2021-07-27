@@ -28,8 +28,8 @@
                             <select name="major-status" class="form-select"
                                 v-model="major.status"
                                 :disabled="disabled">
-                                <option value="1">Activo</option>
-                                <option value="0">Inactivo</option>
+                                <option value="1">Activa</option>
+                                <option value="0">Inactiva</option>
                             </select>
                         </div>
                 </div>
@@ -62,6 +62,7 @@
         created() {
             eventBus.$on("select-major", majorInfo => {
                 this.disabled = true;
+                this.index = majorInfo.index;
 
                 axios.get(`api/majors/${majorInfo.id}`)
                     .then(response => {
@@ -88,6 +89,7 @@
             return {
                 major: {},
                 disabled: false,
+                index: null,
             }
         },
 
@@ -102,7 +104,7 @@
                     request = axios.put(`api/majors/edit/${this.major.id}`, this.major)
                         .then(response => {
                             if (response.status === 200) {
-                                eventBus.$emit('edit-major', response.data);
+                                eventBus.$emit('edit-major', {...response.data, index: this.index});
 
                                 this.$el.querySelector('button.btn-close').dispatchEvent(new Event('click'));
                             }

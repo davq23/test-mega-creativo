@@ -16,6 +16,10 @@
                         data-bs-target="#editCreateMajorModal">
                         Crear carrera
                     </a>
+                    <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal"
+                        data-bs-target="#majorTableModal">
+                        Ver carreras
+                    </a>
                     <a class="nav-link" aria-current="page" href="#" data-bs-toggle="modal"
                         data-bs-target="#editCreateNajorModal"></a>
                 </div>

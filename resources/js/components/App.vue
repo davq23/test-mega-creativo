@@ -5,8 +5,9 @@
             <student-table />
             <delete-student-modal />
             <edit-create-student-modal />
-            <delete-major-modal />
+            <major-table-modal />
             <edit-create-major-modal />
+            <delete-major-modal />
         </div>
     </div>
 </template>
@@ -17,6 +18,7 @@ import DeleteStudentModal from './Students/DeleteStudentModal.vue';
 import EditCreateMajorModal from './Majors/EditCreateMajorModal.vue';
 import DeleteMajorModal from './Majors/DeleteMajorModal.vue';
 import StudentTable from './Students/StudentTable.vue';
+import MajorTableModal from './Majors/MajorTableModal.vue';
 import Navbar from './Layout/Navbar.vue';
 
 export default {
@@ -25,6 +27,7 @@ export default {
     DeleteStudentModal,
     EditCreateMajorModal,
     DeleteMajorModal,
+    MajorTableModal,
     Navbar
     },
 

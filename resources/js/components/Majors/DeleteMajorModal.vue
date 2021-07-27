@@ -68,12 +68,12 @@
             handleClick() {
                 this.disabled = true;
 
-                axios.delete(`api/students/delete/${this.id}`)
+                axios.delete(`api/majors/delete/${this.id}`)
                     .then(response => {
                         if (response.status === 200) {
                             this.$el.querySelector('button.btn-close').dispatchEvent(new Event('click'));
 
-                            eventBus.$emit('delete-student', {
+                            eventBus.$emit('delete-major', {
                                 id: this.id,
                                 index: this.index
                             });

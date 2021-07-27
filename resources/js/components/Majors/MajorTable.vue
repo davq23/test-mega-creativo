@@ -2,9 +2,8 @@
     <table class="table table-striped">
         <tr class="text-center">
             <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Carrera</th>
             <th>Estatus</th>
+            <th>Acciones</th>
         </tr>
         <tbody>
             <major-table-row v-for="(major, index) in majors"
@@ -14,13 +13,13 @@
             <tr class="text-center">
                 <td colspan="2">
                     <button :class="disabled || !last ? 'btn btn-secondary' : 'btn btn-primary'"
-                    @click="loadStudents('back')">
+                    @click="loadMajors('back')">
                         Last
                     </button>
                 </td>
                 <td colspan="2">
                     <button :class="disabled || !next ? 'btn btn-secondary' : 'btn btn-primary'"
-                    @click="loadStudents('next')">
+                    @click="loadMajors('next')">
                         Next
                     </button>
                 </td>
@@ -31,12 +30,12 @@
 
 <script>
     import axios from 'axios';
-    import StudentTableRow from './StudentTableRow.vue';
+    import MajorTableRow from './MajorTableRow.vue';
     import eventBus from './../../eventBus';
 
     export default {
         components: {
-            StudentTableRow,
+            MajorTableRow,
         },
 
         created() {
@@ -64,11 +63,11 @@
         },
 
         mounted() {
-            this.loadStudents('next');
+            this.loadMajors('next');
         },
 
         methods: {
-            loadStudents(direction) {
+            loadMajors(direction) {
                 const offset = direction === 'next' ? this.next : this.last;
 
                 if (offset === null) return;
