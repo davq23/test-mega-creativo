@@ -12,7 +12,7 @@ class StudentController extends Controller
         'name' => 'required|string|min:2|max:80',
         'last_names' => 'required|string|min:3|max:165',
         'email' => 'required|email|max:120',
-        'course_id' => 'required|exists:courses,id',
+        'major_id' => 'required|exists:majors,id',
         'status' => 'required|boolean',
     ];
 
@@ -20,7 +20,7 @@ class StudentController extends Controller
         'name' => 'string|min:2|max:80',
         'last_names' => 'string|min:3|max:165',
         'email' => 'email|max:120',
-        'course_id' => 'exists:courses,id',
+        'major_id' => 'exists:majors,id',
         'status' => 'boolean',
     ];
 
