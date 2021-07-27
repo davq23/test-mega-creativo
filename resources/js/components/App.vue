@@ -8,6 +8,7 @@
             <major-table-modal />
             <edit-create-major-modal />
             <delete-major-modal />
+            <toast-error />
         </div>
     </div>
 </template>
@@ -28,8 +29,11 @@ export default {
     EditCreateMajorModal,
     DeleteMajorModal,
     MajorTableModal,
-    Navbar
+    Navbar,
     },
+
+    mounted() {
+    }
 
 }
 </script>

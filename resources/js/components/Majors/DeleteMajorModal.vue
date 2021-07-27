@@ -81,7 +81,7 @@
                         }
                     })
                     .catch(error => {
-
+                        eventBus.$emit('messages', ['Error desconocido']);
                     })
                     .finally(() => {
                         this.disabled = false;

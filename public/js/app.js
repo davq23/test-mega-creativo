@@ -4970,6 +4970,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4986,7 +4987,8 @@ __webpack_require__.r(__webpack_exports__);
     DeleteMajorModal: _Majors_DeleteMajorModal_vue__WEBPACK_IMPORTED_MODULE_3__.default,
     MajorTableModal: _Majors_MajorTableModal_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     Navbar: _Layout_Navbar_vue__WEBPACK_IMPORTED_MODULE_6__.default
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -5120,7 +5122,9 @@ __webpack_require__.r(__webpack_exports__);
             index: _this2.index
           });
         }
-      })["catch"](function (error) {})["finally"](function () {
+      })["catch"](function (error) {
+        _eventBus__WEBPACK_IMPORTED_MODULE_1__.default.$emit('messages', ['Error desconocido']);
+      })["finally"](function () {
         _this2.disabled = false;
       });
     }
@@ -5218,7 +5222,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (response.status === 200) {
           _this.major = response.data;
         }
-      })["catch"](function (error) {})["finally"](function () {
+      })["catch"](function (error) {
+        _eventBus__WEBPACK_IMPORTED_MODULE_1__.default.$emit('messages', ['Error desconocido']);
+      })["finally"](function () {
         _this.disabled = false;
       });
     });
@@ -5243,9 +5249,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       event.preventDefault();
       var request = null;
+      this.disabled = true;
 
       if (this.major.id) {
-        this.disabled = true;
         request = axios__WEBPACK_IMPORTED_MODULE_0___default().put("api/majors/edit/".concat(this.major.id), this.major).then(function (response) {
           if (response.status === 200) {
             _eventBus__WEBPACK_IMPORTED_MODULE_1__.default.$emit('edit-major', _objectSpread(_objectSpread({}, response.data), {}, {
@@ -5254,7 +5260,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             _this3.$el.querySelector('button.btn-close').dispatchEvent(new Event('click'));
           }
-        })["catch"](function (error) {});
+        })["catch"](function (error) {
+          if (error.status === 422) {
+            _eventBus__WEBPACK_IMPORTED_MODULE_1__.default.$emit('messages', ['Error desconocido']);
+          } else {
+            _eventBus__WEBPACK_IMPORTED_MODULE_1__.default.$emit('messages', ['Error desconocido']);
+          }
+        });
       } else {
         request = axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/majors/new", this.major, {
           headers: {
@@ -43244,7 +43256,9 @@ var render = function() {
           _vm._v(" "),
           _c("edit-create-major-modal"),
           _vm._v(" "),
-          _c("delete-major-modal")
+          _c("delete-major-modal"),
+          _vm._v(" "),
+          _c("toast-error")
         ],
         1
       )
@@ -43611,7 +43625,7 @@ var render = function() {
                 _c(
                   "label",
                   { staticClass: "form-label", attrs: { for: "major-status" } },
-                  [_vm._v("Acciones")]
+                  [_vm._v("Estado")]
                 ),
                 _vm._v(" "),
                 _c(

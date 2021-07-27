@@ -24,7 +24,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="major-status" class="form-label">Acciones</label>
+                            <label for="major-status" class="form-label">Estado</label>
                             <select name="major-status" class="form-select"
                                 v-model="major.status"
                                 :disabled="disabled">
@@ -71,7 +71,7 @@
                         }
                     })
                     .catch(error => {
-
+                        eventBus.$emit('messages', ['Error desconocido']);
                     })
                     .finally(() => {
                         this.disabled = false;
@@ -98,9 +98,9 @@
                 event.preventDefault();
                 let request = null;
 
-                if (this.major.id) {
-                    this.disabled = true;
+                this.disabled = true;
 
+                if (this.major.id) {
                     request = axios.put(`api/majors/edit/${this.major.id}`, this.major)
                         .then(response => {
                             if (response.status === 200) {
@@ -110,7 +110,11 @@
                             }
                         })
                         .catch(error => {
-
+                            if (error.status === 422) {
+                                eventBus.$emit('messages', ['Error desconocido']);
+                            } else {
+                                eventBus.$emit('messages', ['Error desconocido']);
+                            }
                         })
 
                 } else {
